@@ -4,12 +4,11 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "lib/**", "storybook-static/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
+    "lint": {},
     "dev": {
+      "dependsOn": ["@packages/ui#build"],
       "cache": false,
       "persistent": true
     }

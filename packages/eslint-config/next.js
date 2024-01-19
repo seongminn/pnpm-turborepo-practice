@@ -1,35 +1,32 @@
-const { resolve } = require("node:path");
-
-const project = resolve(process.cwd(), "tsconfig.json");
+const { resolve } = require('node:path');
 
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
+  root: true,
   extends: [
-    "eslint:recommended",
-    "prettier",
-    require.resolve("@vercel/style-guide/eslint/next"),
-    "eslint-config-turbo",
+    'next/core-web-vitals',
+    '@packages/eslint-config/base.js',
+    'plugin:jsx-a11y/recommended',
   ],
-  globals: {
-    React: true,
-    JSX: true,
-  },
   env: {
     node: true,
     browser: true,
   },
-  plugins: ["only-warn"],
+  plugins: ['jsx-a11y'],
   settings: {
-    "import/resolver": {
-      typescript: {
-        project,
-      },
+    react: {
+      version: 'detect',
     },
+  },
+  rules: {
+    // react
+    'react/prop-types': 0,
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   ignorePatterns: [
     // Ignore dotfiles
-    ".*.js",
-    "node_modules/",
+    '.next/*',
+    '**/.storybook/*',
   ],
-  overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
 };
